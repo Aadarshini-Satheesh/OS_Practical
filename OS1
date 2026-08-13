@@ -1,0 +1,18 @@
+EXPERIMENT 1 – Installation of Windows / Kali Linux Operating 
+System
+Aim: To install an Operating System (Windows / Kali Linux) on a computer using bootable installation media 
+and verify its successful operation.
+No runnable code — installation steps only.
+Windows Installation Verification Commands
+winver
+systeminfo
+hostname
+ipconfig
+Kali Linux Verification Commands
+uname -a
+cat /etc/os-release
+whoami
+hostname
+lscpu
+df -h
+Result: The operating system was successfully installed and verified using system commands.
