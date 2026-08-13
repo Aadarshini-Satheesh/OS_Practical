@@ -1,0 +1,172 @@
+EXPERIMENT 2 – Illustrate UNIX Commands and Shell Programming
+Aim: To study and execute UNIX commands and write shell programs.
+2.1 UNIX Commands
+Key commands covered: `date`, `cal`, `echo`, `who`, `ls`, `mkdir`, `cd`, `rmdir`, `cat`, `cp`, `mv`, `rm`, `wc`, 
+`head`, `tail`, `grep`, `sort`, `pipe (|)`, `tr`
+2.2 Shell Programming
+Program 1 – Greatest Among Three Numbers
+Aim: To find the greatest among three given numbers.
+#!/bin/bash
+echo "ENTER THREE NUMBERS"
+read a b c
+if [ $a -gt $b ] && [ $a -gt $c ]
+then
+ echo "$a is greater"
+elif [ $b -gt $c ]
+then
+ echo "$b is greater"
+else
+ echo "$c is greater"
+fi
+Output (Input: 10 25 7):
+ENTER THREE NUMBERS
+25 is greater
+Program 2 – Factorial of a Given Number
+Aim: To find the factorial of a given number.
+#!/bin/bash
+echo "ENTER THE NUMBER:"
+read n
+fact=1
+while [ $n -gt 1 ]
+do
+ fact=$((fact * n))
+ n=$((n - 1))
+done
+echo "FACTORIAL OF THE GIVEN NUMBER IS $fact"
+Output (Input: 5):
+ENTER THE NUMBER:
+FACTORIAL OF THE GIVEN NUMBER IS 120
+Program 3 – Sum of Odd Numbers up to N
+Aim: To find the sum of odd numbers up to N.
+#!/bin/bash
+echo "ENTER THE RANGE:"
+read n
+x=1
+sum=0
+while [ $x -le $n ]
+do
+ sum=$((sum + x))
+ x=$((x + 2))
+done
+echo "SUM = $sum"
+Output (Input: 10):
+ENTER THE RANGE:
+SUM = 25
+Program 4 – Generation of Fibonacci Numbers
+Aim: To generate Fibonacci numbers up to a given limit.
+#!/bin/bash
+echo "ENTER THE LIMIT:"
+read n
+p=-1
+q=1
+i=1
+while [ $i -le $n ]
+do
+ r=$((p + q))
+ p=$q
+ q=$r
+ echo "$r"
+ i=$((i + 1))
+done
+Output (Input: 8):
+ENTER THE LIMIT:
+0
+1
+1
+2
+3
+5
+8
+13
+Program 5 – Arithmetic Calculator
+Aim: To implement an arithmetic calculator using the case statement.
+#!/bin/bash
+echo "ENTER THE VALUE OF A:"
+read a
+echo "ENTER THE VALUE OF B:"
+read b
+echo "ENTER THE OPTION TO PERFORM"
+echo "1. ADDITION"
+echo "2. SUBTRACTION"
+echo "3. MULTIPLICATION"
+echo "4. DIVISION"
+read op
+case "$op" in
+ 1) echo "Result = $((a + b))" ;;
+ 2) echo "Result = $((a - b))" ;;
+ 3) echo "Result = $((a * b))" ;;
+ 4) echo "Result = $((a / b))" ;;
+ *) echo "Invalid Option" ;;
+esac
+Output (Input: A=12, B=4, Option=1 Addition):
+ENTER THE VALUE OF A:
+ENTER THE VALUE OF B:
+ENTER THE OPTION TO PERFORM
+1. ADDITION
+2. SUBTRACTION
+3. MULTIPLICATION
+4. DIVISION
+Result = 16
+Program 6 – Largest Digit of a Number
+Aim: To find the largest digit in a given number.
+#!/bin/bash
+echo "ENTER THE NUMBER"
+read a
+max=0
+while [ $a -gt 0 ]
+do
+ r=$((a % 10))
+ if [ $r -gt $max ]
+ then
+ max=$r
+ fi
+ a=$((a / 10))
+done
+echo "THE LARGEST DIGIT OF THE NUMBER: $max"
+Output (Input: 9237):
+ENTER THE NUMBER
+THE LARGEST DIGIT OF THE NUMBER: 9
+Program 7 – Palindrome String Check
+Aim: To check whether a given string is a palindrome.
+#!/bin/bash
+echo "ENTER THE STRING TO CHECK PALINDROME"
+read str
+len=$(echo -n "$str" | wc -c)
+i=1
+j=$((len / 2))
+while [ $i -le $j ]
+do
+ k=$(echo "$str" | cut -c $i)
+ l=$(echo "$str" | cut -c $len)
+ if [ "$k" != "$l" ]
+ then
+ echo "$str is not a palindrome"
+ exit
+ fi
+ i=$((i + 1))
+ len=$((len - 1))
+done
+echo "$str is a palindrome"
+Output (Input: "madam"):
+ENTER THE STRING TO CHECK PALINDROME
+madam is a palindrome
+Output (Input: "hello"):
+ENTER THE STRING TO CHECK PALINDROME
+hello is not a palindrome
+Program 8 – Reverse of a Given Number
+Aim: To find the reverse of a given number.
+#!/bin/bash
+echo "ENTER THE NUMBER"
+read n
+rnum=0
+while [ $n -ne 0 ]
+do
+ remainder=$((n % 10))
+ rnum=$((rnum * 10 + remainder))
+ n=$((n / 10))
+done
+echo "REVERSE OF THE NUMBER IS $rnum"
+Output (Input: 12345):
+ENTER THE NUMBER
+REVERSE OF THE NUMBER IS 54321
+Result: The shell programs were executed successfully and outputs verified.
