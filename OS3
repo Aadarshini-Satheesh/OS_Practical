@@ -1,0 +1,86 @@
+EXPERIMENT 3 – System Calls: Fork, Exit, Getpid, Wait, Close
+Aim: To study and implement process management system calls: `fork()`, `getpid()`, `wait()`, `exit()`, and 
+`close()`.
+Program 1 – Process Creation using fork(), getpid(), wait(), exit()
+C Program:
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+int main()
+{
+ pid_t pid;
+ pid = fork();
+ if(pid < 0)
+ {
+ printf("Fork Failed\n");
+ exit(1);
+ }
+ else if(pid == 0)
+ {
+ printf("\nCHILD PROCESS");
+ printf("\nChild PID : %d", getpid());
+ printf("\nParent PID : %d\n", getppid());
+ exit(0);
+ }
+ else
+ {
+ wait(NULL);
+ printf("\nPARENT PROCESS");
+ printf("\nParent PID : %d", getpid());
+ printf("\nParent's Parent PID : %d\n", getppid());
+ }
+ return 0;
+}
+Compilation: `gcc fork_demo.c -o fork_demo` 
+Execution: `./fork_demo`
+Output:
+CHILD PROCESS
+Child PID : 982
+Parent PID : 981
+PARENT PROCESS
+Parent PID : 981
+Parent's Parent PID : 979
+Shell Script Equivalent
+#!/bin/bash
+echo "Parent Process ID : $$"
+(
+echo "Child Process ID : $$"
+echo "Parent Process ID : $PPID"
+exit 0
+) &
+wait
+echo "Child Process Completed"
+Output:
+Parent Process ID : 983
+Child Process ID : 983
+Parent Process ID : 979
+Child Process CompletedProgram 3 – close() System Call
+C Program:
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+int main()
+{
+ int fd;
+ fd = open("sample.txt", O_RDONLY);
+ if(fd < 0)
+ {
+ printf("File Opening Failed\n");
+ return 1;
+ }
+ printf("File Opened Successfully\n");
+ close(fd);
+ printf("File Closed Successfully\n");
+ return 0;
+}
+Output:
+File Opened Successfully
+File Closed Successfully
+Shell Script:
+#!/bin/bash
+exec 3< sample.txt
+echo "File Opened Successfully"
+exec 3<&-
+echo "File Closed Successfully"
+Result: Process management system calls were studied and implemented successfully.
