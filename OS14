@@ -1,0 +1,67 @@
+EXPERIMENT 14 – File Allocation Strategies
+Aim: To implement Sequential Allocation, Indexed Allocation, and Linked Allocation.
+Program A – Sequential File Allocation
+C Program:
+#include <stdio.h>
+int main()
+{
+ int start, length, i;
+ printf("Enter Starting Block: "); scanf("%d", &start);
+ printf("Enter File Length (Number of Blocks): "); scanf("%d", &length);
+ printf("\nAllocated Blocks:\n");
+ for(i = 0; i < length; i++)
+ printf("%d ", start + i);
+ printf("\n");
+ return 0;
+}
+Output (Starting Block=10, Length=5):
+Allocated Blocks:
+10 11 12 13 14
+Program B – Indexed File Allocation
+Shell Script:
+#!/bin/bash
+echo "Enter Index Block:"
+read index
+echo "Enter Number of Blocks:"
+read n
+echo "Enter Block Numbers:"
+for ((i=0;i<n;i++))
+do
+ read block[$i]
+done
+echo "Index Block : $index"
+echo -n "Allocated Blocks : "
+for ((i=0;i<n;i++))
+do
+ echo -n "${block[$i]} "
+done
+echo
+Program C – Linked File Allocation
+C Program:
+#include <stdio.h>
+int main()
+{
+ int n, blocks[20], i;
+ printf("Enter Number of Blocks: "); scanf("%d", &n);
+ printf("Enter Block Numbers:\n");
+ for(i = 0; i < n; i++) scanf("%d", &blocks[i]);
+ printf("\nLinked Allocation:\n");
+ for(i = 0; i < n - 1; i++)
+ printf("%d --> ", blocks[i]);
+ printf("%d --> NULL\n", blocks[n - 1]);
+ return 0;
+}Output (Blocks: 10 20 35 42 57):
+Linked Allocation:
+10 --> 20 --> 35 --> 42 --> 57 --> NULL
+Result: Sequential, Indexed, and Linked File Allocation strategies implemented and verified.
+
+
+
+
+
+
+
+
+
+
+
